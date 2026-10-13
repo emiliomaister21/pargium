@@ -25,6 +25,7 @@
       --gris-texto: #64748b;
       --gris-oscuro: #0f172a;
       --glow-turquesa: rgba(6, 182, 212, 0.45);
+      --whatsapp: #25d366;
     }
 
     * {
@@ -553,6 +554,36 @@
       box-shadow: 0 12px 28px rgba(245, 158, 11, 0.45);
     }
 
+    /* Botón flotante WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      z-index: 999;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1) translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.65);
+    }
+
+   .whatsapp-float svg {
+  width: 36px;
+  height: 36px;
+  fill: #ffffff;
+}
+
     /* ========================================================
        HERO SECTION
        ======================================================== */
@@ -1015,7 +1046,7 @@
     }
 
     /* ========================================================
-       CÓMO TRABAJAMOS (REEMPLAZO DE ESENCIA)
+       CÓMO TRABAJAMOS
        ======================================================== */
     .como-trabajamos {
       background: var(--azul-fondo);
@@ -1103,7 +1134,7 @@
     }
 
     /* ========================================================
-       SECCIÓN NUEVA: INVERSIÓN
+       SECCIÓN INVERSIÓN
        ======================================================== */
     .inversion-section {
       background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
@@ -1152,33 +1183,6 @@
     }
 
     /* ========================================================
-       BLOG (OCULTO HASTA CONTAR CON ARTÍCULOS REALES)
-       ======================================================== */
-    /*
-    .blog {
-      background: #f8fafc;
-    }
-
-    .grid-blog {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
-      gap: 2.2rem;
-    }
-
-    .post {
-      background: white;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(10, 31, 68, 0.05);
-      border: 1px solid var(--gris-borde);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-    }
-    */
-
-    /* ========================================================
        CONTACTO
        ======================================================== */
     .contacto {
@@ -1220,12 +1224,17 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.07);
       transition: transform 0.3s, background 0.3s, border-color 0.3s;
+      text-decoration: none;
     }
 
     .info-item:hover {
       background: rgba(6, 182, 212, 0.08);
       border-color: rgba(6, 182, 212, 0.3);
       transform: translateX(6px);
+    }
+
+    .info-item-link {
+      cursor: pointer;
     }
 
     .info-item .ico {
@@ -1240,6 +1249,13 @@
       justify-content: center;
       font-size: 1.25rem;
       box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+    }
+
+    .info-item .ico-wa {
+      background: rgba(37, 211, 102, 0.15);
+      border-color: rgba(37, 211, 102, 0.4);
+      color: var(--whatsapp);
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.2);
     }
 
     .info-item strong {
@@ -1258,7 +1274,11 @@
       word-break: break-word;
     }
 
-    .info-item a:hover {
+    .info-item:hover span, .info-item a:hover {
+      color: var(--turquesa-brillante);
+    }
+
+    .info-item.info-item-link:hover span {
       color: var(--turquesa-brillante);
       text-decoration: underline;
     }
@@ -1820,28 +1840,6 @@
     </div>
   </section>
 
-  <!-- SECCIÓN BLOG
-       Nota para el desarrollador: Sección oculta temporalmente hasta tener al menos 3 artículos reales publicados.
-       Descomentar el bloque inferior cuando estén listos.
-  <section class="blog" id="blog">
-    <div class="container">
-      <h2 class="section-title reveal">Del <span>blog</span></h2>
-      <p class="section-subtitle reveal">Lo que aprendemos escribiendo código.</p>
-      <div class="grid-blog">
-        <article class="post reveal">
-          <div class="post-img">💻</div>
-          <div class="post-body">
-            <span class="post-tag">IA & Backend</span>
-            <h3>Título real del Artículo 1</h3>
-            <p>Descripción técnica concisa y real de lo aprendido en el proyecto.</p>
-            <span class="post-date">Octubre 2026</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-  -->
-
   <!-- CONTACTO -->
   <section class="contacto" id="contacto">
     <div class="container">
@@ -1861,13 +1859,14 @@
             </div>
           </div>
 
-          <div class="info-item">
-            <div class="ico">📱</div>
+          <!-- ENLACE DIRECTO A WHATSAPP -->
+          <a class="info-item info-item-link" href="https://wa.me/522216074974?text=Hola%20PARGIUM,%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto" target="_blank" rel="noopener noreferrer">
+            <div class="ico ico-wa">💬</div>
             <div>
-              <strong>Teléfono / WhatsApp Directo</strong>
-              <span>+52 222 000 0000</span>
+              <strong>WhatsApp Directo</strong>
+              <span>+52 221 607 4974 (Haz clic para chatear)</span>
             </div>
-          </div>
+          </a>
 
           <div class="info-item">
             <div class="ico">📍</div>
@@ -1930,6 +1929,13 @@
     </div>
   </div>
 
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+<a href="https://wa.me/522216074974?text=Hola%20PARGIUM,%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 32 32" width="36" height="36" fill="currentColor">
+    <path d="M16 2.5C8.544 2.5 2.5 8.544 2.5 16c0 2.65.772 5.12 2.1 7.2L3 29.5l6.5-1.56a13.41 13.41 0 0 0 6.5 1.56c7.456 0 13.5-6.044 13.5-13.5S23.456 2.5 16 2.5zm0 24.6c-2.07 0-4.04-.6-5.72-1.63l-.41-.25-4.25 1.02 1.13-4.14-.27-.43A11.08 11.08 0 0 1 4.9 16c0-6.13 4.97-11.1 11.1-11.1S27.1 9.87 27.1 16 22.13 27.1 16 27.1zm6.1-8.32c-.34-.17-2.01-.99-2.32-1.1-.31-.11-.53-.17-.75.17-.23.34-.88 1.1-1.07 1.33-.2.23-.39.26-.73.09-.34-.17-1.42-.52-2.71-1.67-1-.89-1.68-2-1.88-2.34-.2-.34-.02-.53.15-.7.15-.15.34-.39.51-.59.17-.2.23-.34.34-.56.11-.23.06-.43-.03-.6-.09-.17-.75-1.81-1.03-2.48-.27-.65-.55-.56-.75-.57h-.64c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.86 5.18.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.14.66-.1 2.01-.82 2.3-1.62.28-.79.28-1.47.2-1.61-.09-.15-.31-.24-.65-.41z"/>
+  </svg>
+</a>
+
   <!-- PIE DE PÁGINA -->
   <footer>
     <div class="footer-grid">
@@ -1972,17 +1978,13 @@
   </footer>
 
   <script>
-    // ========================================================
     // 0. FORZAR SCROLL ARRIBA AL RECARGAR
-    // ========================================================
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
 
-    // ========================================================
     // 1. PRELOADER ANIMADO CON CONTADOR DEL 0 AL 100%
-    // ========================================================
     window.addEventListener('DOMContentLoaded', () => {
       window.scrollTo(0, 0);
       iniciarPreloader();
@@ -2026,9 +2028,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ========================================================
     // 2. MENÚ RESPONSIVO MÓVIL
-    // ========================================================
     const mobileBtn = document.getElementById('mobile-toggle-btn');
     const mobileDrawer = document.getElementById('mobile-drawer');
     const mobileOverlay = document.getElementById('mobile-overlay');
@@ -2057,9 +2057,7 @@
       });
     });
 
-    // ========================================================
     // 3. BARRA DE SCROLL SUPERIOR Y HEADER DINÁMICO
-    // ========================================================
     const progressBar = document.getElementById('scroll-progress');
     const header = document.getElementById('site-header');
 
@@ -2075,9 +2073,7 @@
       }
     });
 
-    // ========================================================
     // 4. EFECTO TYPEWRITER EN HERO
-    // ========================================================
     const words = [
       'como tú trabajas.',
       'a tu medida.',
@@ -2118,9 +2114,7 @@
       setTimeout(handleTyping, speed);
     }
 
-    // ========================================================
     // 5. CANVAS NEURAL CONSTELLATION RESPONSIVO
-    // ========================================================
     function initNeuralConstellation() {
       const canvas = document.getElementById('neural-canvas');
       if (!canvas) return;
@@ -2220,9 +2214,7 @@
       animate();
     }
 
-    // ========================================================
-    // 6. EFECTO 3D TILT FLUIDO SIN LAG EN TARJETAS
-    // ========================================================
+    // 6. EFECTO 3D TILT
     function initCardTiltEffects() {
       const cards = document.querySelectorAll('.tilt-card');
 
@@ -2262,9 +2254,7 @@
       });
     }
 
-    // ========================================================
-    // 7. SCROLL OBSERVER Y CONTADORES NUMÉRICOS
-    // ========================================================
+    // 7. SCROLL OBSERVER Y CONTADORES
     function initScrollObserver() {
       const reveals = document.querySelectorAll('.reveal');
 
@@ -2321,9 +2311,7 @@
       requestAnimationFrame(updateNumber);
     }
 
-    // ========================================================
     // 8. FORMULARIO Y MODAL DE ÉXITO
-    // ========================================================
     function enviarFormulario(e) {
       e.preventDefault();
       const modal = document.getElementById('feedback-modal');
